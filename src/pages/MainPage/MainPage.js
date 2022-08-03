@@ -31,7 +31,7 @@ const MainPage = () => {
   //     .then(response => {
   //       setPosts(handleShuffle(response.data))
   //     })
-  // })
+  // }, [])
 
   return (
     <div>
