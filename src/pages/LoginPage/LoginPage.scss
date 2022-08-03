@@ -1,0 +1,67 @@
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+@use '../../styles/partials/global';
+
+.login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0rem 1.5rem;
+
+    &__modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000;
+        opacity: .5;
+    }
+
+    &__modal-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1050;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        outline: 0;
+    }
+
+    &__modal {
+        z-index: 100;
+        background: white;
+        position: relative;
+        margin: 1.75rem auto;
+        border-radius: 5px;
+        max-width: 300px;
+        padding: 1rem;
+
+        @include mixins.tablet {
+            max-width: 500px;
+        }
+    }
+
+    &__modal-header {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__close-button {
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        opacity: .3;
+        cursor: pointer;
+        border: none;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+}
