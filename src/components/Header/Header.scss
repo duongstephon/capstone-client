@@ -10,15 +10,30 @@
     width: 100%;
     padding: 0rem 1.5rem;
 
-    &__logo {
-        margin: 1rem 0rem 0rem 0rem;
+    @include mixins.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem 2rem;
     }
 
-    &__buttons {
+    &__logo {
+        margin: 1rem 0rem 0rem 0rem;
+
+        @include mixins.tablet {
+            margin: 0;
+        }
+    }
+
+    &__buttons-section {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+
+        @include mixins.tablet {
+            width: 60%;
+            max-width: 18rem;
+        }
     }
 
     &__form {
@@ -31,6 +46,12 @@
         padding: 0.5rem;
         border: solid 1px gainsboro;
         border-radius: 8px;
+
+        @include mixins.tablet {
+            width: 100%;
+            max-width: 25rem;
+        }
+
     }
 
     &__button {
@@ -39,6 +60,11 @@
         border: none;
         border-radius: 8px;
         margin: 0rem 0rem 1rem 0rem;
+
+        @include mixins.tablet {
+            margin: 0;
+            max-width: 8rem;
+        }
     }
 
     &__logged-in {
@@ -46,6 +72,11 @@
         width: 80%;
         justify-content: space-between;
         align-items: center;
+        margin-right: 1rem;
+
+        @include mixins.tablet {
+            justify-content: flex-end;
+        }
     }
 
     &__username {
@@ -53,5 +84,20 @@
         color: white;
         text-decoration: underline;
         margin-bottom: 2rem;
+
+        @include mixins.tablet {
+            margin: 0 1rem 0 0;
+            font-size: 0.8rem;
+        }
+    }
+
+    &__bottom-section {
+        display: flex;
+        flex-direction: column;
+
+        @include mixins.tablet {
+            justify-content: space-between;
+        }
+
     }
 }
