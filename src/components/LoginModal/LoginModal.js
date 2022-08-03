@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './LoginPage.scss'
+import './LoginModal.scss'
 
-const LoginPage = ({isShowing, hide}) => {
+const LoginModal = ({isShowing, hide}) => {
   const [ loginError, setLoginError ] = useState('')
   const [ loginSuccess, setLoginSuccess ] = useState(false)
 
@@ -56,4 +56,4 @@ const LoginPage = ({isShowing, hide}) => {
    )}
 
 
-export default LoginPage;
+export default LoginModal;

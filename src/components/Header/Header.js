@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.scss';
 import { useState, useEffect } from 'react'
-import LoginPage from '../../pages/LoginPage/LoginPage';
+import LoginModal from '../LoginModal/LoginModal';
 
 const Header = () => {
   const [ isShowing, setIsShowing ] = useState(false)
@@ -21,7 +21,7 @@ const Header = () => {
         <button className='header__single-button' onClick={toggle}>Login</button>
         <button className='header__single-button'>Go To Stories</button>
       </div>
-      <LoginPage isShowing={isShowing} hide={toggle} />
+      <LoginModal isShowing={isShowing} hide={toggle} />
     </div>
   );
 };
