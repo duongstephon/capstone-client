@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import './LoginModal.scss'
+import './LoginModal.scss';
 
-const LoginModal = ({isShowing, hide}) => {
+const API_URL = process.env.REACT_APP_API_URL;
+
+const LoginModal = ({isShowing, hide, setIsLoggedIn}) => {
   const [ loginError, setLoginError ] = useState('')
   const [ loginSuccess, setLoginSuccess ] = useState(false)
 
@@ -16,9 +18,12 @@ const LoginModal = ({isShowing, hide}) => {
       password: form.password.value
     }
 
-    axios.post('http://localhost:5050/users/login', loginInfo)
-      .then(() => {
+    axios.post(`${API_URL}/users/login`, loginInfo)
+      .then((response) => {
+        sessionStorage.setItem('authToken', response.data.token);
         setLoginSuccess(true);
+        hide()
+        setIsLoggedIn(true)
       })
       .catch(err => {
         setLoginError(err.response.data)
@@ -38,16 +43,15 @@ const LoginModal = ({isShowing, hide}) => {
         </div>
         <form className='login__form' onSubmit={handleSubmit}>
           <label className="login__label" htmlFor="email">E-mail</label>
-          <input className="login__input" type="email" />
+          <input className="login__input" type="email" name='email'/>
           <label className="login__label" htmlFor="password">Password</label>
-          <input className="login__input" type="password" />
+          <input className="login__input" type="password" name='password'/>
           <button className="login__button">Log in</button>
           
           {/* Error message */}
-          {{loginError} && (
-            <div className="signup__message">{loginError}</div>
+          {loginError && (
+            <p>Incorrect Email and Password</p>
           )}
-          
         </form>
         <p>Need an account?</p>
       </div>
