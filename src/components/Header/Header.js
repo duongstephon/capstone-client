@@ -11,7 +11,7 @@ const Header = () => {
   const [ isLoggedIn, setIsLoggedIn] = useState(false)
   const [ currentUser, setCurrentUser ] = useState(null)
 
-  const toggle = () => {
+  const toggleModal = () => {
     setIsShowing(!isShowing)
   }
 
@@ -19,30 +19,30 @@ const Header = () => {
     const authToken = sessionStorage.getItem('authToken')
     if (!authToken) {
       setIsLoggedIn(false)
-    }
-    if (isLoggedIn) {
-    axios
-      .get(`${API_URL}/users/current`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      })
-      .then((res) => {
-        setCurrentUser(res.data)
-        console.log(res.data)
-      })
-      .catch(err => {
-        setIsLoggedIn(false)
-      });
-    }
-    }
-  , [isLoggedIn]);
+    } else if (!isLoggedIn) {
+      axios
+        .get(`${API_URL}/users/current`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        })
+        .then((res) => {
+          setIsLoggedIn(true)
+          setCurrentUser(res.data)
+        })
+        .catch(err => {
+          setIsLoggedIn(false)
+        });
+      }}
+    );
 
   const handleLogout = () => {
     setCurrentUser(null);
     setIsLoggedIn(false);
     sessionStorage.removeItem('authToken')
   }
+
+  console.log(currentUser)
 
   if (!isLoggedIn) {
     return (
@@ -51,16 +51,14 @@ const Header = () => {
         <form className='header__form'>
         <input className='header__search-bar' placeholder='Search'/>
         </form>
-        <div className='header__buttons'>
-          <button className='header__button' onClick={toggle}>Login</button>
+        <div className='header__buttons-section'>
+          <button className='header__button' onClick={toggleModal}>Login</button>
           <button className='header__button'>Go To Stories</button>
         </div>
-        <LoginModal isShowing={isShowing} hide={toggle} setIsLoggedIn={setIsLoggedIn}/>
+        <LoginModal isShowing={isShowing} hide={toggleModal} setIsLoggedIn={setIsLoggedIn}/>
       </div>
     );
-  };
-  
-  if (isLoggedIn) {
+  } else {
   return (
     <div className='header'>
       <h2 className='header__logo'>Read.ME</h2>
@@ -68,7 +66,7 @@ const Header = () => {
       <input className='header__search-bar' placeholder='Search'/>
       </form>
       <div className='header__logged-in'>
-        <p className='header__username'>currentusername</p>
+        <p className='header__username'>{currentUser ? currentUser.username : 'Loading...'}</p>
         <button onClick={handleLogout} className='header__button'>Log Out</button>
       </div>
       <button className='header__button'>Go To Stories</button>
