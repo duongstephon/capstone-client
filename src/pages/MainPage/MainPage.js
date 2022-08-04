@@ -4,10 +4,8 @@ import './MainPage.scss'
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const MainPage = () => {
-  const [ posts, setPosts ] = useState([])
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-  const [ user, setUser ] = useState(null)
+const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }) => {
+  const [ posts, setPosts ] = useState([]);
 
   const handleShuffle = (array) => {
     let currIndex = array.length, randomIndex;
@@ -20,23 +18,44 @@ const MainPage = () => {
     return array
   }
 
-  // useEffect(() => {
-  //   const authToken = sessionStorage.getItem('authToken');
-  //   if (!authToken) {
-  //     setIsLoggedIn(false)
-  //   }
+  useEffect(() => {
+    const authToken = sessionStorage.getItem('authToken')
+    if (!authToken) {
+      setIsLoggedIn(false)
+    } else if (!isLoggedIn) {
+      axios
+        .get(`${API_URL}/users/current`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        })
+        .then((res) => {
+          setIsLoggedIn(true)
+          setCurrentUser(res.data)
+        })
+        .catch(err => {
+          setIsLoggedIn(false)
+        });
+      }
+    }
+  );
 
-  //   axios
+  // useEffect(() => {
+  //   if (!posts) {
+  //     axios
   //     .get(`${API_URL}/posts`)
   //     .then(response => {
-  //       setPosts(handleShuffle(response.data))
+  //       setPosts(response.data)
   //     })
-  // }, [])
+  //   }
+  //   });
+
+  console.log(posts)
 
   return (
     <div>
         {posts.map(post => {
-          <p>{post.id}</p>
+          <p>hello</p>
         })}
     </div>
   );

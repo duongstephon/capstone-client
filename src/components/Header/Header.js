@@ -6,10 +6,8 @@ import axios from 'axios'
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Header = () => {
+const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }) => {
   const [ isShowing, setIsShowing ] = useState(false)
-  const [ isLoggedIn, setIsLoggedIn] = useState(false)
-  const [ currentUser, setCurrentUser ] = useState(null)
 
   const toggleModal = () => {
     setIsShowing(!isShowing)
