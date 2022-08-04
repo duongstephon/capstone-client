@@ -1,15 +1,22 @@
 import React from 'react';
+import './SinglePost.scss';
+import Likes from '../../assets/images/icon-like.svg';
 
-const singlePost = () => {
+const SinglePost = ({title, text, likes, date}) => {
+
   return (
-    <div>
-      <h4>title</h4>
+    <div className='post'>
+      <h4>{title}</h4>
       <div>
-        <p>post</p>
+        <p>{text}</p>
       </div>
-      <p>likes</p>
+      <div className='post__likes'>
+        <img src={Likes} alt='likes' />
+        <p>{likes}</p>
+      </div>
+      <p>{date}</p>
     </div>
   );
 };
 
-export default singlePost;
+export default SinglePost;
