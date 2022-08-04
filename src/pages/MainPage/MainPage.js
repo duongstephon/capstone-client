@@ -40,22 +40,24 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }) =>
     }
   );
 
-  // useEffect(() => {
-  //   if (!posts) {
-  //     axios
-  //     .get(`${API_URL}/posts`)
-  //     .then(response => {
-  //       setPosts(response.data)
-  //     })
-  //   }
-  //   });
-
+  useEffect(() => {
+    if (!posts) {
+      axios
+      .get(`${API_URL}/posts`)
+      .then(response => {
+        setPosts(response.data)
+      })
+    }
+    });
+  
   console.log(posts)
 
   return (
     <div>
-        {posts.map(post => {
-          <p>hello</p>
+        {posts.map((post) => {
+          return (
+            <p>{post.title}</p>
+          )
         })}
     </div>
   );

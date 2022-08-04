@@ -40,8 +40,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }) => {
     sessionStorage.removeItem('authToken')
   }
 
-  console.log(currentUser)
-
   if (!isLoggedIn) {
     return (
       <div className='header'>
