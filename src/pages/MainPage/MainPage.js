@@ -63,10 +63,14 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
         {posts.map((post) => {
           return (
           <SinglePost 
-            title={post.title} 
-            text={post.text} 
-            likes={post.likes} 
-            date={handleDate(post.date)}/>
+            id={post.id}
+            userId={post.user_id}
+            title={post.title}
+            text={post.text}
+            likes={post.likes}
+            date={handleDate(post.date)} 
+            isLoggedIn={isLoggedIn}
+            curretnUser={currentUser}/>
           )
         })}
     </div>

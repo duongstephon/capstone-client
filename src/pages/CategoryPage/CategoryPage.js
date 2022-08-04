@@ -54,19 +54,21 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
       }
   }, [isNewCategory]);
 
-  console.log(match)
-  console.log(category)
-
   return (
     <div className='main'>
       <h1>{category ? category.name : 'Loading...'}</h1>
+      <h3>{category ? category.description : 'Loading...'}</h3>
       {posts.map((post) => {
         return (
           <SinglePost
+          id={post.id}
+          userId={post.user_id}
           title={post.title}
           text={post.text}
           likes={post.likes}
-          date={handleDate(post.date)} />
+          date={handleDate(post.date)} 
+          isLoggedIn={isLoggedIn}
+          curretnUser={currentUser}/>
         )
       })}
     </div>

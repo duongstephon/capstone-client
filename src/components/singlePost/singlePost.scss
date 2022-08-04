@@ -9,7 +9,28 @@
     transition: 0.3s;
     padding: 0.5rem;
     border-radius: 5px;
-    margin: 1rem 0;
+    margin: 1rem auto;
+    max-width: 25rem;
+
+    @include mixins.tablet {
+        max-width: 40rem;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: black;
+    }
+
+    &__post-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__likes-date {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     &__likes {
         display: flex;
