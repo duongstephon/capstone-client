@@ -41,8 +41,7 @@ function App() {
             handleDate={handleDate}
             {...routerProps}/> 
           )
-        }} />
-        {/*
+          }} />
         <Route path='/categories/:categoryid' exact component={(routerProps) => {
           return (
             <CategoryPage
@@ -53,7 +52,7 @@ function App() {
             handleDate={handleDate}
             {...routerProps}/> 
           )
-        }} />*/}   
+          }} /> 
       </Switch>
     </Router>
   );

@@ -6,7 +6,7 @@ import SinglePost from '../../components/SinglePost/SinglePost';
 const API_URL = process.env.REACT_APP_API_URL;
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
-const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate }) => {
+const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, history, match }) => {
   const [ posts, setPosts ] = useState([]);
   const [ isBackground, setIsBackground ] = useState(false)
 
@@ -44,10 +44,11 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
   );
 
   useEffect(() => {
-    // if (!isBackground) {
-    //   axios
-    //     .get(`${UNSPLASH_KEY}`)
-    // }
+    if (!isBackground) {
+      axios
+        .get(`${UNSPLASH_KEY}`)
+    }
+    
     if (posts) {
       axios
         .get(`${API_URL}/posts`)
@@ -56,8 +57,6 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
         })
       }
     }, []);
-
-  console.log(currentUser)
 
   return (
     <div className='main'>
