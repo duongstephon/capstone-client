@@ -3,10 +3,11 @@ import './Header.scss';
 import { useState, useEffect } from 'react'
 import LoginModal from '../LoginModal/LoginModal';
 import axios from 'axios'
+import { Link } from 'react-router-dom' 
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, history }) => {
   const [ isShowing, setIsShowing ] = useState(false)
 
   const toggleModal = () => {
@@ -43,7 +44,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }) => {
   if (!isLoggedIn) {
     return (
       <div className='header'>
-        <h2 className='header__logo'>Read.ME</h2>
+        <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
         <form className='header__form'>
         <input className='header__search-bar' placeholder='Search'/>
         </form>

@@ -11,27 +11,27 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
   const [isNewPostId, setIsNewPostId] = useState(null);
   const [ postedUser, setPostedUser ] = useState(null);
 
-  useEffect(() => {
-    const authToken = sessionStorage.getItem('authToken')
-    if (!authToken) {
-      setIsLoggedIn(false)
-    } else if (!isLoggedIn) {
-      axios
-        .get(`${API_URL}/users/current`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`
-          }
-        })
-        .then((res) => {
-          setIsLoggedIn(true)
-          setCurrentUser(res.data)
-        })
-        .catch(err => {
-          setIsLoggedIn(false)
-        });
-    }
-  }
-  );
+  // useEffect(() => {
+  //   const authToken = sessionStorage.getItem('authToken')
+  //   if (!authToken) {
+  //     setIsLoggedIn(false)
+  //   } else if (!isLoggedIn) {
+  //     axios
+  //       .get(`${API_URL}/users/current`, {
+  //         headers: {
+  //           Authorization: `Bearer ${authToken}`
+  //         }
+  //       })
+  //       .then((res) => {
+  //         setIsLoggedIn(true)
+  //         setCurrentUser(res.data)
+  //       })
+  //       .catch(err => {
+  //         setIsLoggedIn(false)
+  //       });
+  //   }
+  // }
+  // );
 
   useEffect(() => {
     const postId = match.params.postid
@@ -47,14 +47,6 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
               .then((response) => {
                 setComments(response.data)
               })
-          
-          axios
-          .get(`${API_URL}/users`)
-            .then((response) => {
-              if (currentPost) {
-                setPostedUser(response.data.filter((user) => {return user.id === currentPost.user_id}))
-              }
-            })
         })
         .catch(err => {
           setIsNewPostId(null)
@@ -62,13 +54,25 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
     }
   })
 
+  // useEffect(() => {
+  //   if (!currentPost) {
+  //     console.log(currentPost)
+  //     axios
+  //     .get(`${API_URL}/users`)
+  //       .then((response) => {
+  //         if (currentPost) {
+  //           setPostedUser(response.data.filter((user) => {return user.id === currentPost.user_id})[0])
+  //         }
+  //       })
+  //       .catch(err => console.log(err))
+  //   }
+  // }, [currentPost])
+
   console.log(currentPost)
-  console.log(comments)
-  console.log(postedUser)
 
   return (
     <div className='post-page'>
-        <p>{currentPost ? `Posted by ${currentPost.username}` : 'Loading...'}</p>
+        <p>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
         <h2>{currentPost ? currentPost.title : 'Loading...'}</h2>
         <p>{currentPost ? currentPost.text : 'Loading...'}</p>
         <div className='post-page__likes-date'>
