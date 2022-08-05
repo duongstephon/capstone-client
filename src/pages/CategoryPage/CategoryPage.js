@@ -9,7 +9,7 @@ const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, match }) => {
   const [category, setCategory] = useState(null);
-  const [isNewCategory, setIsNewCategory] = useState(null);
+  const [isNewCategoryId, setIsNewCategoryId] = useState(null);
   const [posts, setPosts] = useState([]);
   const [isBackground, setIsBackground] = useState(false);
 
@@ -38,7 +38,8 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
 
   useEffect(() => {
       const categoryId = match.params.categoryid
-      if (isNewCategory !== categoryId) {
+      if (isNewCategoryId !== categoryId) {
+        setIsNewCategoryId(categoryId);
         axios
         .get(`${API_URL}/categories/${categoryId}`)
           .then((response) => {
@@ -52,7 +53,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
             })
           .catch(err => {console.log(err)})
       }
-  }, [isNewCategory]);
+  }, [isNewCategoryId]);
 
   return (
     <div className='main'>
@@ -63,6 +64,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
           <SinglePost
           id={post.id}
           userId={post.user_id}
+          categoryId={post.category_id}
           title={post.title}
           text={post.text}
           likes={post.likes}

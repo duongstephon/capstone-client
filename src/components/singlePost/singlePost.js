@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const SinglePost = ({id, userId, title, text, likes, date, isLoggedIn, currentUser}) => {
+const SinglePost = ({id, userId, categoryId, title, text, likes, date, isLoggedIn, currentUser}) => {
   const [ postedUser, setPostedUser ] = useState(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const SinglePost = ({id, userId, title, text, likes, date, isLoggedIn, currentUs
 
   return (
     <div className='post'>
-    <Link className='post__link'>
+    <Link to={`/categories/${categoryId}/posts/${id}`} className='post__link'>
       <div className='post__post-content'>
         <p>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
         <h4>{title}</h4>

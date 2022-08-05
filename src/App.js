@@ -2,6 +2,7 @@ import './App.scss';
 import Header from './components/Header/Header';
 import MainPage from './pages/MainPage/MainPage';
 import CategoryPage from './pages/CategoryPage/CategoryPage';
+import PostPage from './pages/PostPage/PostPage';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
@@ -52,7 +53,18 @@ function App() {
             handleDate={handleDate}
             {...routerProps}/> 
           )
-          }} /> 
+          }} />
+        <Route path='/categories/:categoryid/posts/:postid' exact component={(routerProps) => {
+            return (
+              <PostPage
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              handleDate={handleDate}
+              {...routerProps}/> 
+            )
+            }} /> 
       </Switch>
     </Router>
   );
