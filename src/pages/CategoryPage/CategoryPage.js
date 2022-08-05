@@ -70,7 +70,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
           likes={post.likes}
           date={handleDate(post.date)} 
           isLoggedIn={isLoggedIn}
-          curretnUser={currentUser}/>
+          currentUser={currentUser}/>
         )
       })}
     </div>

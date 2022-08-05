@@ -12,9 +12,9 @@ const SinglePost = ({id, userId, categoryId, title, text, likes, date, isLoggedI
   useEffect(() => {
     if (!postedUser) {
       axios
-        .get(`${API_URL}/users`)
+        .get(`${API_URL}/posts/${id}/user`)
           .then((response) => {
-            setPostedUser(response.data.filter((user) => user.id === userId)[0])
+            setPostedUser(response.data[0])
           })
     }
   }, [postedUser])

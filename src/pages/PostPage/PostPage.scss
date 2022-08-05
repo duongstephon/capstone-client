@@ -23,4 +23,13 @@
     &__date {
         margin-left: 1rem;
     }
+
+    &__comment {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__comment-input {
+        resize: none;
+    }
 }

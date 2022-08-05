@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './PostPage.scss';
 import axios from 'axios';
 import Likes from '../../assets/images/icon-like.svg';
+import Comment from '../../components/Comment/Comment';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -54,21 +55,16 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
     }
   })
 
-  // useEffect(() => {
-  //   if (!currentPost) {
-  //     console.log(currentPost)
-  //     axios
-  //     .get(`${API_URL}/users`)
-  //       .then((response) => {
-  //         if (currentPost) {
-  //           setPostedUser(response.data.filter((user) => {return user.id === currentPost.user_id})[0])
-  //         }
-  //       })
-  //       .catch(err => console.log(err))
-  //   }
-  // }, [currentPost])
-
-  console.log(currentPost)
+  useEffect(() => {
+    const postId = match.params.postid
+    if (!postedUser) {
+      axios
+        .get(`${API_URL}/posts/${postId}/user`)
+          .then((response) => {
+            setPostedUser(response.data[0])
+          })
+    }
+  }, [postedUser])
 
   return (
     <div className='post-page'>
@@ -80,6 +76,28 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
           <p>{currentPost ? currentPost.likes : 'Loading...'}</p>
           <p className='post-page__date'>{currentPost ? handleDate(currentPost.date) : 'Loading...'}</p>
         </div>
+        <section>
+          <form className='post-page__comment'>
+            <label>{currentUser ? `Comment as ${currentUser.username}` : `Login to comment` }</label>
+            <textarea className='post-page__comment-input' type='text' placeholder='Add a comment...'/>
+            <button>Comment</button>
+          </form>
+          {comments?.map((comment) => {
+            return (
+              <Comment
+              key={comment.id}
+              id={comment.id}
+              userId={comment.user_id}
+              postId={comment.post_id}
+              text={comment.text}
+              likes={comment.likes}
+              date={comment.date}
+              handleDate={handleDate}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}/>
+            )
+          })}
+        </section>
     </div>
   );
 };
