@@ -9,7 +9,7 @@ const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, match }) => {
   const [category, setCategory] = useState(null);
-  const [isNewCategory, setIsNewCategory] = useState(null);
+  const [isNewCategoryId, setIsNewCategoryId] = useState(null);
   const [posts, setPosts] = useState([]);
   const [isBackground, setIsBackground] = useState(false);
 
@@ -37,8 +37,9 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
   );
 
   useEffect(() => {
-      const categoryId = match.params.categoryid
-      if (isNewCategory !== categoryId) {
+      const categoryId = match.params.categoryId
+      if (isNewCategoryId !== categoryId) {
+        setIsNewCategoryId(categoryId);
         axios
         .get(`${API_URL}/categories/${categoryId}`)
           .then((response) => {
@@ -52,21 +53,24 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
             })
           .catch(err => {console.log(err)})
       }
-  }, [isNewCategory]);
-
-  console.log(match)
-  console.log(category)
+  }, [isNewCategoryId]);
 
   return (
     <div className='main'>
       <h1>{category ? category.name : 'Loading...'}</h1>
+      <h3>{category ? category.description : 'Loading...'}</h3>
       {posts.map((post) => {
         return (
           <SinglePost
+          id={post.id}
+          userId={post.user_id}
+          categoryId={post.category_id}
           title={post.title}
           text={post.text}
           likes={post.likes}
-          date={handleDate(post.date)} />
+          date={handleDate(post.date)} 
+          isLoggedIn={isLoggedIn}
+          currentUser={currentUser}/>
         )
       })}
     </div>
