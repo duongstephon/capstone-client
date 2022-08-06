@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './CategoryPage.scss';
 import axios from 'axios';
 import SinglePost from '../../components/SinglePost/SinglePost';
+import { Link } from 'react-router-dom'
 
 const API_URL = process.env.REACT_APP_API_URL;
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
@@ -56,12 +57,18 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
   }, [isNewCategoryId]);
 
   return (
-    <div className='main'>
-      <h1>{category ? category.name : 'Loading...'}</h1>
-      <h3>{category ? category.description : 'Loading...'}</h3>
+    <div className='category'>
+      <div className='category__title-section'>
+        <div>
+          <h1>{category ? category.name : 'Loading...'}</h1>
+          <h3>{category ? category.description : 'Loading...'}</h3>
+        </div>
+        <Link to={`/categories/${isNewCategoryId}/createpost`}><button>Add Post</button></Link>
+      </div>
       {posts.map((post) => {
         return (
           <SinglePost
+          // key={post.id}
           id={post.id}
           userId={post.user_id}
           categoryId={post.category_id}

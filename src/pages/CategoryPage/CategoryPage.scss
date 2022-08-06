@@ -1,0 +1,13 @@
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+@use '../../styles/partials/global';
+
+.category {
+    display: flex;
+    flex-direction: column;
+
+    &__title-section {
+        display: flex;
+        justify-content: space-between;
+    }
+}
