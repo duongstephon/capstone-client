@@ -43,7 +43,7 @@ function App() {
             {...routerProps}/> 
           )
           }} />
-        <Route path='/categories/:categoryid' exact component={(routerProps) => {
+        <Route path='/categories/:categoryId' exact component={(routerProps) => {
           return (
             <CategoryPage
             isLoggedIn={isLoggedIn}
@@ -54,7 +54,7 @@ function App() {
             {...routerProps}/> 
           )
           }} />
-        <Route path='/categories/:categoryid/posts/:postid' exact component={(routerProps) => {
+        <Route path='/categories/:categoryId/posts/:postId' exact component={(routerProps) => {
             return (
               <PostPage
               isLoggedIn={isLoggedIn}

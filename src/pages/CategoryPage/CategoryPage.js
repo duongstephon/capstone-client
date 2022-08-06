@@ -37,7 +37,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
   );
 
   useEffect(() => {
-      const categoryId = match.params.categoryid
+      const categoryId = match.params.categoryId
       if (isNewCategoryId !== categoryId) {
         setIsNewCategoryId(categoryId);
         axios

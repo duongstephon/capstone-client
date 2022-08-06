@@ -58,7 +58,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, histor
   } else {
   return (
     <div className='header'>
-      <h2 className='header__logo'>Read.ME</h2>
+    <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
       <form className='header__form'>
       <input className='header__search-bar' placeholder='Search'/>
       </form>

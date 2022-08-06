@@ -7,35 +7,37 @@ import Comment from '../../components/Comment/Comment';
 const API_URL = process.env.REACT_APP_API_URL;
 
 const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, match }) => {
-  const [comments, setComments] = useState(null);
-  const [currentPost, setCurrentPost] = useState(null);
-  const [isNewPostId, setIsNewPostId] = useState(null);
+  const [ comments, setComments ] = useState(null);
+  const [ currentPost, setCurrentPost ] = useState(null);
+  const [ isNewPostId, setIsNewPostId ] = useState(null);
   const [ postedUser, setPostedUser ] = useState(null);
-
-  // useEffect(() => {
-  //   const authToken = sessionStorage.getItem('authToken')
-  //   if (!authToken) {
-  //     setIsLoggedIn(false)
-  //   } else if (!isLoggedIn) {
-  //     axios
-  //       .get(`${API_URL}/users/current`, {
-  //         headers: {
-  //           Authorization: `Bearer ${authToken}`
-  //         }
-  //       })
-  //       .then((res) => {
-  //         setIsLoggedIn(true)
-  //         setCurrentUser(res.data)
-  //       })
-  //       .catch(err => {
-  //         setIsLoggedIn(false)
-  //       });
-  //   }
-  // }
-  // );
+  const [ newComment, setNewComment ] = useState('');
+  const [ isDisabled, setIsDisabled ] = useState('true')
 
   useEffect(() => {
-    const postId = match.params.postid
+    const authToken = sessionStorage.getItem('authToken')
+    if (!authToken) {
+      setIsLoggedIn(false)
+    } else if (!isLoggedIn) {
+      axios
+        .get(`${API_URL}/users/current`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        })
+        .then((res) => {
+          setIsLoggedIn(true)
+          setCurrentUser(res.data)
+        })
+        .catch(err => {
+          setIsLoggedIn(false)
+        });
+    }
+  }
+  );
+
+  useEffect(() => {
+    const postId = match.params.postId
     if (isNewPostId !== postId) {
       setIsNewPostId(postId)
       axios
@@ -56,7 +58,7 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
   })
 
   useEffect(() => {
-    const postId = match.params.postid
+    const postId = match.params.postId
     if (!postedUser) {
       axios
         .get(`${API_URL}/posts/${postId}/user`)
@@ -65,6 +67,29 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
           })
     }
   }, [postedUser])
+
+  const handleChange = (event) => {
+    setNewComment(event.target.value);
+  }
+
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    const postId = match.params.postId 
+    if (isLoggedIn && newComment) {
+      axios
+        .post(`${API_URL}/posts/${postId}/comments`, {
+          text: newComment,
+          date: Date.now(),
+          likes: 0,
+          post_id: postId,
+          user_id: currentUser.id
+        })
+        .then((response) => {
+          setComments(response.data)
+        })
+    }
+    event.target.reset();
+  }
 
   return (
     <div className='post-page'>
@@ -77,9 +102,9 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
           <p className='post-page__date'>{currentPost ? handleDate(currentPost.date) : 'Loading...'}</p>
         </div>
         <section>
-          <form className='post-page__comment'>
+          <form className='post-page__comment' onSubmit={handleCommentSubmit}>
             <label>{currentUser ? `Comment as ${currentUser.username}` : `Login to comment` }</label>
-            <textarea className='post-page__comment-input' type='text' placeholder='Add a comment...'/>
+            <textarea className='post-page__comment-input' type='text' name='comment' value={newComment} onChange={handleChange} placeholder='Add a comment...'/>
             <button>Comment</button>
           </form>
           {comments?.map((comment) => {
@@ -88,7 +113,6 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
               key={comment.id}
               id={comment.id}
               userId={comment.user_id}
-              postId={comment.post_id}
               text={comment.text}
               likes={comment.likes}
               date={comment.date}
