@@ -93,20 +93,23 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
 
   return (
     <div className='post-page'>
-        <p>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
+        <p className='post-page__user'>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
         <h2>{currentPost ? currentPost.title : 'Loading...'}</h2>
-        <p>{currentPost ? currentPost.text : 'Loading...'}</p>
+        <p className='post-page__text'>{currentPost ? currentPost.text : 'Loading...'}</p>
         <div className='post-page__likes-date'>
-          <img src={Likes} alt='likes' />
-          <p>{currentPost ? currentPost.likes : 'Loading...'}</p>
+          <img className='post-page__likes-image' src={Likes} alt='likes' />
+          <p className='post-page__likes-number'>{currentPost ? currentPost.likes : 'Loading...'}</p>
           <p className='post-page__date'>{currentPost ? handleDate(currentPost.date) : 'Loading...'}</p>
         </div>
         <section>
           <form className='post-page__comment' onSubmit={handleCommentSubmit}>
-            <label>{currentUser ? `Comment as ${currentUser.username}` : `Login to comment` }</label>
+            <label className='post-page__login-label'>{currentUser ? `Comment as ${currentUser.username}` : `Login to comment` }</label>
             <textarea className='post-page__comment-input' type='text' name='comment' value={newComment} onChange={handleChange} placeholder='Add a comment...'/>
-            <button>Comment</button>
+            <div className='post-page__tablet-button-format'>
+              <button className='post-page__button'>Comment</button>
+            </div>
           </form>
+          <h4>{comments ? `${comments.length} Comments` : '0 Comments'}</h4>
           {comments?.map((comment) => {
             return (
               <Comment

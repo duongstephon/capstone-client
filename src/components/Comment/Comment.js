@@ -21,14 +21,16 @@ const Comment = ({ id, userId, text, likes, handleDate, date, isLoggedIn, curren
   return (
     <div className='comment'>
       <div className='comment__info'>
-        <p>{commentUser ? commentUser.username : 'Loading...'}</p>
-        <p>{handleDate(date)}</p>
-        <div className='comment__likes'>
-          <img src={Likes} alt='likes' />
-          <p>{likes}</p>
+        <p className='comment__user'>{commentUser ? commentUser.username : 'Loading...'}</p>
+        <div className='comment__date-likes'>
+          <div className='comment__likes'>
+            <img className='comment__likes-image' src={Likes} alt='likes' />
+            <p className='comment__likes-number'>{likes}</p>
+          </div>        
+          <p className='comment__date'>{handleDate(date)}</p>
         </div>
       </div>
-      <p>{text}</p>
+      <p className='comment__text'>{text}</p>
 
     </div>
   );
