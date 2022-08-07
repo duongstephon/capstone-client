@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import './CreatePostPage.scss';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -74,13 +75,15 @@ const CreatePostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser
     }
   }
   return (
-    <div>
-      <h1>{currentCategory ? `Create a Post for <${currentCategory.name}>` : 'Loading...'}</h1>
+    <div className="create-post" >
+      <h1 className="create-post__title" >{currentCategory ? `Create a Post for ${currentCategory.name}` : 'Loading...'}</h1>
       <form onSubmit={handleSubmit}>
-      <label>{currentUser ? `Post as ${currentUser.username}` : `Login to comment` }</label>
-        <input type='text' name='title' value={title} onChange={handleTitleChange}  placeholder='Title'/>
-        <textarea type='text' name='text' value={text} onChange={handleTextChange} placeholder='Text (optional)'/>
-        <button>Post</button>
+      <label className="create-post__user" >{currentUser ? `Post as ${currentUser.username}` : `Login to comment` }</label>
+      <div className="create-post__container" >  
+        <input className="create-post__input" type='text' name='title' value={title} onChange={handleTitleChange}  placeholder='Title'/>
+        <textarea className="create-post__textarea" type='text' name='text' value={text} onChange={handleTextChange} placeholder='Text (optional)'/>
+            <button className="create-post__post" >Post</button>
+        </div>
       </form>
     </div>
   );

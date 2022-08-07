@@ -1,0 +1,96 @@
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+@use '../../styles/partials/global';
+
+.create-post {
+    border: 3px solid variables.$blue;
+    border-radius: 10px;
+    text-align: center;
+    width: 95%;
+    margin: 4rem auto 0;
+    display: block;
+    height: 25rem;
+    background-color: rgba($color: variables.$light-grey, $alpha: 0.4);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 10px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding-top: 1rem;
+    @include mixins.tablet {
+        width: 70%;
+        max-width: 35rem;
+    }
+
+    @include mixins.desktop {
+        width: 50%;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        margin: 0.5rem;
+        color: variables.$blue;
+        text-transform: uppercase;
+
+        @include mixins.tablet {
+            font-size: 1.8rem;
+        }
+
+        @include mixins.desktop {
+            font-size: 2rem;
+        }
+    }
+
+    &__user {
+        color: variables.$accent-orange;
+        font-weight: 600;
+        text-transform: lowercase;
+    }
+
+    &__container {
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__input, &__textarea {
+        border: 2px solid variables.$blue;
+        border-radius: 10px;
+        width: 15rem;
+        color: variables.$accent-orange;
+        background-color: transparent;
+    }
+
+    &__input {
+        padding:  0.5rem 1rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        text-transform: capitalize;
+
+    }
+
+    &__textarea {
+        resize: none;
+        padding: 0.5rem 1rem;
+        height: 8rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif sans-serif;
+
+    }
+
+    &__post {
+        margin-top: 1rem;
+        background-color: white;
+        border: 2px solid variables.$blue;
+        color: variables.$blue;
+        padding: 0.5rem;
+        width: 5rem;
+        border-radius: 20px;
+        text-transform: uppercase;
+        font-weight: 600;
+
+        &:hover {
+            border: 2px solid variables.$accent-orange;
+            color: variables.$accent-orange;
+
+        }
+
+
+    }
+}
