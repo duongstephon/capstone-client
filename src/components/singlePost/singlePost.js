@@ -23,15 +23,15 @@ const SinglePost = ({id, userId, categoryId, title, text, likes, date, isLoggedI
     <div className='post'>
     <Link to={`/categories/${categoryId}/posts/${id}`} className='post__link'>
       <div className='post__post-content'>
-        <p>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
-        <h4>{title}</h4>
+        <p className='post__user'>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
+        <h4 className='post__title'>{title}</h4>
         <p>{text}</p>
       </div>
     </Link>
     <div className='post__likes-date'>
       <div className='post__likes'>
-        <img src={Likes} alt='likes' />
-        <p>{likes}</p>
+        <img className='post__likes-image'src={Likes} alt='likes' />
+        <p className='post__likes-number'>{likes}</p>
       </div>
         <p>{date}</p>
     </div>

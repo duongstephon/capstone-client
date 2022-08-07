@@ -103,6 +103,17 @@ p {
         text-transform:uppercase;
         letter-spacing: 2px;
     }
+
+    &__name-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__name-form {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .link {
@@ -110,4 +121,8 @@ p {
     font-weight: 600;
     text-transform: uppercase;
     text-decoration: underline;
+    
+    @include mixins.tablet {
+        margin-left: 1rem;
+    }
 }

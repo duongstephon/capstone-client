@@ -59,11 +59,11 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
   return (
     <div className='category'>
       <div className='category__title-section'>
-        <div>
+        <div className='category__title-and-button'>
           <h1>{category ? category.name : 'Loading...'}</h1>
-          <h3>{category ? category.description : 'Loading...'}</h3>
+          <Link to={`/categories/${isNewCategoryId}/createpost`}><button className='category__button'>Add Post</button></Link>
         </div>
-        <Link to={`/categories/${isNewCategoryId}/createpost`}><button>Add Post</button></Link>
+        <h3 className='category__description'>{category ? category.description : 'Loading...'}</h3>
       </div>
       {posts.map((post) => {
         return (

@@ -58,12 +58,11 @@
         width: 100%;
 
         @include mixins.tablet {
-            width: 70%;
-            max-width: 18rem;
+            width: 15rem;
         }
 
         @include mixins.desktop {
-            width: 100%;
+            width: 21rem;
         }
     }
 
@@ -73,7 +72,11 @@
 
         @include mixins.tablet {
             margin-right: 0;
-            width: 55%;
+            width: 40%;
+        }
+
+        @include mixins.desktop {
+            width: 60%;
         }
     }
 
@@ -85,7 +88,12 @@
 
         @include mixins.tablet {
             width: 100%;
-            max-width: 25rem;
+        }
+
+        @include mixins.desktop {
+            width: 80%;
+            font-size: 1rem;
+            padding: 0.8rem;
         }
 
     }
@@ -107,13 +115,14 @@
 
         @include mixins.tablet {
             margin: 0;
-            max-width: 8rem;
+            width: 8rem;
             width: 45%;
         }
 
         @include mixins.desktop {
-           font-size: 1.1rem;
-   
+            width: 10rem;
+            font-size: 1.1rem;
+            max-width: none;
         }
     }
 
