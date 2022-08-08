@@ -5,16 +5,29 @@ import CategoryPage from './pages/CategoryPage/CategoryPage';
 import PostPage from './pages/PostPage/PostPage';
 import CreatePostPage from './pages/CreatePostPage/CreatePostPage';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn] = useState(false);
   const [ currentUser, setCurrentUser ] = useState(null);
-  const [ category, setCategory ] = useState('')
+  const [ currentCategoryId, setCurrentCategoryId ] = useState(null);
+  const [ category, setCategory ] = useState(null);
+
+  const history = useHistory()
+
+  useEffect(() => {
+    if (category && category.id !== currentCategoryId) {
+      setCurrentCategoryId(category.id)
+      history.push(`/categories/${category.id}`);
+    }
+  }, [category])
+
+
   // const [ isBackground, setIsBackground ] = useState(null);
 
   // useEffect(() => {
@@ -40,8 +53,7 @@ function App() {
   }
   
   return (
-
-    <Router>
+    <>
       <Header 
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
@@ -95,7 +107,7 @@ function App() {
             )
             }} /> 
       </Switch>
-    </Router>
+    </>
   );
 }
 

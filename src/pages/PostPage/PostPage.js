@@ -12,7 +12,6 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
   const [ isNewPostId, setIsNewPostId ] = useState(null);
   const [ postedUser, setPostedUser ] = useState(null);
   const [ newComment, setNewComment ] = useState('');
-  const [ isDisabled, setIsDisabled ] = useState('true')
 
   useEffect(() => {
     const authToken = sessionStorage.getItem('authToken')
@@ -90,7 +89,7 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
     } else {
       alert('Please login to make comment')
     }
-    event.target.reset();
+    setNewComment('');
   }
 
   return (

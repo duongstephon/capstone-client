@@ -67,7 +67,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
       {posts.map((post) => {
         return (
           <SinglePost
-          // key={post.id}
+          key={post.id}
           id={post.id}
           userId={post.user_id}
           categoryId={post.category_id}
@@ -76,6 +76,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
           likes={post.likes}
           date={handleDate(post.date)} 
           isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
           currentUser={currentUser}
           setAllPosts={setPosts}
           match={match}/>
