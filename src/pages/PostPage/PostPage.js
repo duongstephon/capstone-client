@@ -87,6 +87,8 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
         .then((response) => {
           setComments(response.data)
         })
+    } else {
+      alert('Please login to make comment')
     }
     event.target.reset();
   }
@@ -121,7 +123,11 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
               date={comment.date}
               handleDate={handleDate}
               isLoggedIn={isLoggedIn}
-              currentUser={currentUser}/>
+              setIsLoggedIn={setIsLoggedIn}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              match={match}
+              setComments={setComments} />
             )
           })}
         </section>

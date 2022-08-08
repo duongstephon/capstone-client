@@ -72,7 +72,10 @@ const CreatePostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser
         .then((response) => {
           history.push(`/categories/${categoryId}`)
         })
+    } else {
+      alert('Please login and fill out all fields to make post')
     }
+    event.target.reset()
   }
   return (
     <div className="create-post" >

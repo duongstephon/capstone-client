@@ -4,7 +4,10 @@
 
 
 .main {
-    padding: 2rem 1.5rem;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
 
     &__post-card {
         margin: 1rem 0;

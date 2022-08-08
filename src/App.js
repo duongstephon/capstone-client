@@ -8,11 +8,25 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
+const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn] = useState(false);
   const [ currentUser, setCurrentUser ] = useState(null);
+  const [ category, setCategory ] = useState('')
+  // const [ isBackground, setIsBackground ] = useState(null);
+
+  // useEffect(() => {
+  //   if (!isBackground) {
+  //     axios
+  //       .get(`${UNSPLASH_API_URL}/photos/random/?client_id=${UNSPLASH_KEY}`)
+  //         .then(response => {
+  //           setIsBackground(response.data)
+  //         })
+  //   }
+  // })
+  // style={isBackground ? {backgroundImage: "url(" + isBackground.urls.raw + ")"} : {background: 'white'}}
 
   const handleDate = (timestamp) => {
     let date = new Date(timestamp)
@@ -26,13 +40,16 @@ function App() {
   }
   
   return (
+
     <Router>
       <Header 
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         currentUser={currentUser}
-        setCurrentUser={setCurrentUser}/>
-      <Switch>
+        setCurrentUser={setCurrentUser}
+        category={category}
+        setCategory={setCategory}/>
+      <Switch className='app'>
         <Route path='/' exact component={(routerProps) => {
           return (
             <MainPage 

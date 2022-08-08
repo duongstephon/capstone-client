@@ -4,11 +4,11 @@ import './MainPage.scss'
 import SinglePost from '../../components/SinglePost/SinglePost';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, history, match }) => {
   const [ posts, setPosts ] = useState([]);
-  const [ isBackground, setIsBackground ] = useState(false)
 
   const handleShuffle = (array) => {
     let currIndex = array.length, randomIndex;
@@ -55,6 +55,7 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
 
   return (
     <div className='main'>
+      <div>
         {posts.map((post) => {
           return (
           <SinglePost 
@@ -67,9 +68,14 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
             likes={post.likes}
             date={handleDate(post.date)} 
             isLoggedIn={isLoggedIn}
-            curretnUser={currentUser}/>
+            setIsLoggedIn={setIsLoggedIn}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            setAllPosts={setPosts}
+            match={match}/>
           )
-        })}
+        })}  
+      </div>
     </div>
   );
 };
