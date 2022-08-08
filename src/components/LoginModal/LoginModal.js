@@ -66,15 +66,15 @@ const LoginModal = ({isShowing, hide}) => {
               </button>
             </div>
             <form className='login__form' onSubmit={handleRegister} >
-              <div>
-                <div>
+              <div className='login__name-section'>
+                <div className='login__name-form'>
                   <label className="login__label" htmlFor="text">First Name</label>
                   <input className="login__input" type="text" name='first_name'/>
                 </div>
-                <div>
+                <div className='login__name-form'>
                   <label className="login__label" htmlFor="text">Last Name</label>
                   <input className="login__input" type="text" name='last_name'/>
-              </div>
+                </div>
               </div>
               <label className="login__label" htmlFor="email">E-mail</label>
               <input className="login__input" type="email" name='email'/>
@@ -82,7 +82,7 @@ const LoginModal = ({isShowing, hide}) => {
               <input className="login__input" type="text" name='username'/>
               <label className="login__label" htmlFor="password">Password</label>
               <input className="login__input" type="password" name='password'/>
-              <button className="login__button">Log in</button>
+              <button className="login__button">Register</button>
               
               {/* Error message */}
               {isError && (

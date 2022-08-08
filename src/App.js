@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import MainPage from './pages/MainPage/MainPage';
 import CategoryPage from './pages/CategoryPage/CategoryPage';
 import PostPage from './pages/PostPage/PostPage';
+import CreatePostPage from './pages/CreatePostPage/CreatePostPage';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
@@ -57,6 +58,17 @@ function App() {
         <Route path='/categories/:categoryId/posts/:postId' exact component={(routerProps) => {
             return (
               <PostPage
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              handleDate={handleDate}
+              {...routerProps}/> 
+            )
+            }} /> 
+        <Route path='/categories/:categoryId/createpost' exact component={(routerProps) => {
+            return (
+              <CreatePostPage
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
               currentUser={currentUser}

@@ -3,12 +3,12 @@ import './Header.scss';
 import { useState, useEffect } from 'react'
 import LoginModal from '../LoginModal/LoginModal';
 import axios from 'axios'
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, history }) => {
-  const [ isShowing, setIsShowing ] = useState(false)
+  const [isShowing, setIsShowing] = useState(false)
 
   const toggleModal = () => {
     setIsShowing(!isShowing)
@@ -32,8 +32,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, histor
         .catch(err => {
           setIsLoggedIn(false)
         });
-      }}
-    );
+    }
+  }
+  );
 
   const handleLogout = () => {
     setCurrentUser(null);
@@ -46,29 +47,33 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, histor
       <div className='header'>
         <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
         <form className='header__form'>
-        <input className='header__search-bar' placeholder='Search'/>
+          <input className='header__search-bar' placeholder='Search' />
         </form>
         <div className='header__buttons-section'>
           <button className='header__button' onClick={toggleModal}>Login</button>
           <button className='header__button'>Go To Stories</button>
         </div>
-        <LoginModal isShowing={isShowing} hide={toggleModal} setIsLoggedIn={setIsLoggedIn}/>
+        <LoginModal isShowing={isShowing} hide={toggleModal} setIsLoggedIn={setIsLoggedIn} />
       </div>
     );
   } else {
-  return (
-    <div className='header'>
-    <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
-      <form className='header__form'>
-      <input className='header__search-bar' placeholder='Search'/>
-      </form>
-      <div className='header__logged-in'>
-        <p className='header__username'>{currentUser ? currentUser.username : 'Loading...'}</p>
-        <button onClick={handleLogout} className='header__button'>Log Out</button>
+    return (
+      <div className='header'>
+        <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
+        <form className='header__form'>
+          <input className='header__search-bar' placeholder='Search' />
+        </form>
+        <div className="header__info" >
+          <p className='header__username'>{currentUser ? currentUser.username : 'Loading...'}</p>
+          <div className='header__logged-in'>
+            <button onClick={handleLogout} className='header__button'>Log Out</button>
+            <button className='header__button'>Go To Stories</button>
+          </div>
+        </div>
+
       </div>
-      <button className='header__button'>Go To Stories</button>
-    </div>
-  )};
+    )
+  };
 }
 
 export default Header;

@@ -5,13 +5,45 @@
 .comment {
     display: flex;
     flex-direction: column;
+    margin: 2rem 0rem;
 
     &__info {
         display: flex;
+        flex-direction: column;
+    }
+
+    &__user {
+        margin: 0;
+    }
+
+    &__date-likes {
+        display: flex;
+        width: 8rem;
         justify-content: space-between;
+        margin: 0.4rem 0rem;
+        font-size: 0.9rem;
+    }
+
+    &__date {
+        margin: 0;
     }
 
     &__likes {
         display: flex;
+    }
+
+    &__likes-image {
+        width: 1rem;
+        margin: 0 0.3rem 0 0;
+    }
+
+    &__likes-number {
+        margin-left: 0.5rem;
+        margin: 0;
+    }
+
+    &__text {
+        margin: 0;
+        color: black;
     }
 }
