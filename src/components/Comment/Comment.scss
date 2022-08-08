@@ -12,6 +12,16 @@
         flex-direction: column;
     }
 
+    &__user-delete {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__delete {
+        width: 1.1rem;
+    }
+
     &__user {
         margin: 0;
     }

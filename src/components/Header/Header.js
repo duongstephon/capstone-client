@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom'
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, history }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, category, setCategory }) => {
   const [isShowing, setIsShowing] = useState(false)
+  const [ search, setSearch ] = useState('')
 
   const toggleModal = () => {
     setIsShowing(!isShowing)
@@ -36,6 +37,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, histor
   }
   );
 
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  }
+
+  const handleSearchSumbit = (event) => {
+    event.preventDefault();
+  }
+
   const handleLogout = () => {
     setCurrentUser(null);
     setIsLoggedIn(false);
@@ -47,7 +56,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, histor
       <div className='header'>
         <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
         <form className='header__form'>
-          <input className='header__search-bar' placeholder='Search' />
+          <input className='header__search-bar' placeholder='Search' type='text' name='search' value={search} onChange={handleChange}/>
         </form>
         <div className='header__buttons-section'>
           <button className='header__button' onClick={toggleModal}>Login</button>

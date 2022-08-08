@@ -10,11 +10,16 @@
     transition: 0.3s;
     padding: 0.5rem;
     border-radius: 5px;
-    margin: 1rem auto;
-    width: 100%;
+    margin: 1rem;
 
     @include mixins.tablet {
         width: 40rem;
+        margin: 1rem auto;
+    }
+
+    &__delete {
+        width: 1.1rem;
+        align-self: flex-end;
     }
 
     &__user {
@@ -53,5 +58,9 @@
 
     &__likes-number {
         margin-left: 0.5rem;
+    }
+
+    &__text {
+        word-wrap: break-word;
     }
 }
