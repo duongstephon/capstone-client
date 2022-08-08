@@ -45,7 +45,6 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
         .get(`${API_URL}/categories/${categoryId}`)
           .then((response) => {
             setCategory(response.data);
-
             axios
               .get(`${API_URL}/categories/${categoryId}/posts`)
                 .then((response) => {
