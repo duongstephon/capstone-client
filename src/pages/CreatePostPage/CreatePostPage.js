@@ -78,7 +78,7 @@ const CreatePostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser
     <div className="create-post" >
       <h1 className="create-post__title" >{currentCategory ? `Create a Post for ${currentCategory.name}` : 'Loading...'}</h1>
       <form onSubmit={handleSubmit}>
-      <label className="create-post__user" >{currentUser ? `Post as ${currentUser.username}` : `Login to comment` }</label>
+      <label className="create-post__user" >{currentUser ? `Post as ${currentUser.username}` : `Login to Post` }</label>
       <div className="create-post__container" >  
         <input className="create-post__input" type='text' name='title' value={title} onChange={handleTitleChange}  placeholder='Title'/>
         <textarea className="create-post__textarea" type='text' name='text' value={text} onChange={handleTextChange} placeholder='Text (optional)'/>
