@@ -4,15 +4,12 @@ import { useState, useEffect } from 'react'
 import LoginModal from '../LoginModal/LoginModal';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import CategoryPage from '../../pages/CategoryPage/CategoryPage';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, category, setCategory }) => {
   const [isShowing, setIsShowing] = useState(false)
   const [ search, setSearch ] = useState('')
-
-  const navigate = useNavigate();
 
   const toggleModal = () => {
     setIsShowing(!isShowing)
@@ -53,6 +50,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, catego
             return cat.name === search
           }))
         })
+    setSearch('');
   }
 
   const handleLogout = () => {
@@ -60,8 +58,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, catego
     setIsLoggedIn(false);
     sessionStorage.removeItem('authToken')
   }
-
-  console.log(category)
 
   if (!isLoggedIn) {
     return (
@@ -81,8 +77,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, catego
     return (
       <div className='header'>
         <Link to='/'><h2 className='header__logo'>Read.ME</h2></Link>
-        <form className='header__form'>
-          <input className='header__search-bar' placeholder='Search' />
+        <form className='header__form' onSubmit={handleSearchSubmit}>
+          <input className='header__search-bar' placeholder='Search' type='text' name='search' value={search} onChange={handleChange}/>
         </form>
         <div className="header__info" >
           <p className='header__username'>{currentUser ? currentUser.username : 'Loading...'}</p>
@@ -91,7 +87,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, catego
             <button className='header__button'>Go To Stories</button>
           </div>
         </div>
-
       </div>
     )
   };
