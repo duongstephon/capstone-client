@@ -9,6 +9,7 @@ const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, history, match }) => {
   const [ posts, setPosts ] = useState([]);
+  const [ isBackground, setIsBackground ] = useState(null)
 
   const handleShuffle = (array) => {
     let currIndex = array.length, randomIndex;
@@ -49,12 +50,18 @@ const MainPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
         .get(`${API_URL}/posts`)
         .then((response) => {
           setPosts(handleShuffle(response.data))
+
+          axios
+          .get(`${UNSPLASH_API_URL}/photos/random/?orientation=landscape&client_id=${UNSPLASH_KEY}`)
+            .then(background => {
+              setIsBackground(background.data)
+            })
         })
       }
     }, []);
 
   return (
-    <div className='main'>
+    <div className='main' style={isBackground ? {backgroundImage: "url(" + isBackground.urls.raw + ")"} : {background: 'white'}}>
       <div>
         {posts.map((post) => {
           return (

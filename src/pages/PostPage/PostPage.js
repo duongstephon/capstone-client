@@ -5,13 +5,16 @@ import Likes from '../../assets/images/icon-like.svg';
 import Comment from '../../components/Comment/Comment';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
+const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, handleDate, match }) => {
-  const [ comments, setComments ] = useState(null);
-  const [ currentPost, setCurrentPost ] = useState(null);
-  const [ isNewPostId, setIsNewPostId ] = useState(null);
-  const [ postedUser, setPostedUser ] = useState(null);
-  const [ newComment, setNewComment ] = useState('');
+  const [comments, setComments] = useState(null);
+  const [currentPost, setCurrentPost] = useState(null);
+  const [isNewPostId, setIsNewPostId] = useState(null);
+  const [postedUser, setPostedUser] = useState(null);
+  const [newComment, setNewComment] = useState('');
+  const [isBackground, setIsBackground] = useState(null)
 
   useEffect(() => {
     const authToken = sessionStorage.getItem('authToken')
@@ -40,15 +43,21 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
     if (isNewPostId !== postId) {
       setIsNewPostId(postId)
       axios
-      .get(`${API_URL}/posts/${postId}`)
+        .get(`${API_URL}/posts/${postId}`)
         .then((response) => {
           setCurrentPost(response.data[0])
 
           axios
-            .get(`${API_URL}/posts/${postId}/comments`)
-              .then((response) => {
-                setComments(response.data)
-              })
+            .get(`${UNSPLASH_API_URL}/search/photos?orientation=landscape&query=${response.data[0].title}&client_id=${UNSPLASH_KEY}`)
+            .then(background => {
+              setIsBackground(background.data.results[0])
+
+              axios
+                .get(`${API_URL}/posts/${postId}/comments`)
+                .then((response) => {
+                  setComments(response.data)
+                })
+            })
         })
         .catch(err => {
           setIsNewPostId(null)
@@ -61,9 +70,9 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
     if (!postedUser) {
       axios
         .get(`${API_URL}/posts/${postId}/user`)
-          .then((response) => {
-            setPostedUser(response.data[0])
-          })
+        .then((response) => {
+          setPostedUser(response.data[0])
+        })
     }
   }, [postedUser])
 
@@ -73,7 +82,7 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
-    const postId = match.params.postId 
+    const postId = match.params.postId
     if (isLoggedIn && newComment) {
       axios
         .post(`${API_URL}/posts/${postId}/comments`, {
@@ -93,7 +102,8 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
   }
 
   return (
-    <div className='post-page'>
+    <div className='post-page' style={isBackground ? {backgroundImage: "url(" + isBackground.urls.raw + ")"} : {background: 'white'}}>
+      <div className='post-page__card'>
         <p className='post-page__user'>{postedUser ? `Posted by ${postedUser.username}` : 'Loading...'}</p>
         <h2>{currentPost ? currentPost.title : 'Loading...'}</h2>
         <p className='post-page__text'>{currentPost ? currentPost.text : 'Loading...'}</p>
@@ -104,8 +114,8 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
         </div>
         <section>
           <form className='post-page__comment' onSubmit={handleCommentSubmit}>
-            <label className='post-page__login-label'>{currentUser ? `Comment as ${currentUser.username}` : `Login to comment` }</label>
-            <textarea className='post-page__comment-input' type='text' name='comment' value={newComment} onChange={handleChange} placeholder='Add a comment...'/>
+            <label className='post-page__login-label'>{currentUser ? `Comment as ${currentUser.username}` : `Login to comment`}</label>
+            <textarea className='post-page__comment-input' type='text' name='comment' value={newComment} onChange={handleChange} placeholder='Add a comment...' />
             <div className='post-page__tablet-button-format'>
               <button className='post-page__button'>Comment</button>
             </div>
@@ -114,22 +124,23 @@ const PostPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, hand
           {comments?.map((comment) => {
             return (
               <Comment
-              key={comment.id}
-              id={comment.id}
-              userId={comment.user_id}
-              text={comment.text}
-              likes={comment.likes}
-              date={comment.date}
-              handleDate={handleDate}
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-              match={match}
-              setComments={setComments} />
+                key={comment.id}
+                id={comment.id}
+                userId={comment.user_id}
+                text={comment.text}
+                likes={comment.likes}
+                date={comment.date}
+                handleDate={handleDate}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                match={match}
+                setComments={setComments} />
             )
           })}
         </section>
+      </div>
     </div>
   );
 };
