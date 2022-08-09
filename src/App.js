@@ -6,11 +6,6 @@ import PostPage from './pages/PostPage/PostPage';
 import CreatePostPage from './pages/CreatePostPage/CreatePostPage';
 import { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL;
-const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
-const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,20 +21,6 @@ function App() {
       history.push(`/categories/${category.id}`);
     }
   }, [category])
-
-
-  // const [ isBackground, setIsBackground ] = useState(null);
-
-  // useEffect(() => {
-  //   if (!isBackground) {
-  //     axios
-  //       .get(`${UNSPLASH_API_URL}/search/photos?orientation=landscape&query=ask-me&client_id=${UNSPLASH_KEY}`)
-  //         .then(response => {
-  //           setIsBackground(response.data)
-  //         })
-  //   }
-  // })
-  // style={isBackground ? {backgroundImage: "url(" + isBackground.urls.raw + ")"} : {background: 'white'}}
 
   const handleDate = (timestamp) => {
     let date = new Date(timestamp)
