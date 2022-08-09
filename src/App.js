@@ -33,7 +33,7 @@ function App() {
   // useEffect(() => {
   //   if (!isBackground) {
   //     axios
-  //       .get(`${UNSPLASH_API_URL}/photos/random/?client_id=${UNSPLASH_KEY}`)
+  //       .get(`${UNSPLASH_API_URL}/search/photos?orientation=landscape&query=ask-me&client_id=${UNSPLASH_KEY}`)
   //         .then(response => {
   //           setIsBackground(response.data)
   //         })

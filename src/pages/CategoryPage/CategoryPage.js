@@ -12,7 +12,7 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
   const [category, setCategory] = useState(null);
   const [isNewCategoryId, setIsNewCategoryId] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [isBackground, setIsBackground] = useState(false);
+  const [isBackground, setIsBackground] = useState(null);
 
 
   useEffect(() => {
@@ -45,18 +45,27 @@ const CategoryPage = ({ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, 
         .get(`${API_URL}/categories/${categoryId}`)
           .then((response) => {
             setCategory(response.data);
+            
             axios
               .get(`${API_URL}/categories/${categoryId}/posts`)
-                .then((response) => {
-                  setPosts(response.data);
+                .then((posts) => {
+                  setPosts(posts.data);
+
+                axios
+                  .get(`${UNSPLASH_API_URL}/search/photos?orientation=landscape&query=${response.data.name}&client_id=${UNSPLASH_KEY}`)
+                    .then(background => {
+                      setIsBackground(background.data.results[0])
+                    })
                 })
             })
           .catch(err => {console.log(err)})
       }
   }, [isNewCategoryId]);
 
+  console.log(isBackground)
+
   return (
-    <div className='category'>
+    <div className='category' style={isBackground ? {backgroundImage: "url(" + isBackground.urls.raw + ")"} : {background: 'white'}}>
       <div className='category__title-section'>
         <div className='category__title-and-button'>
           <h1>{category ? category.name : 'Loading...'}</h1>
