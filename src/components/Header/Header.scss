@@ -1,0 +1,193 @@
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+@use '../../styles/partials/global';
+
+ a {
+    text-decoration: none;
+ }
+
+.header {
+    background-color: rgba($color: variables.$dark-blue, $alpha: 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.5rem 0;
+    border-bottom: 3px solid variables.$accent-orange;
+
+    @include mixins.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1.5rem 2rem;
+    }
+
+    @include mixins.desktop {
+        padding: 2rem 3rem;
+    }
+
+    &__logo {
+        color: variables.$light-grey;
+        border: 2px solid variables.$light-grey;
+        padding: 0.5rem 2rem;
+        border-radius: 15px;
+        text-transform: uppercase;
+        margin: 1rem 0rem;
+        letter-spacing: 3px;
+
+        &:hover {
+            background-color: rgba($color: variables.$accent-orange, $alpha: 0.8);
+            border-color: variables.$light-grey;
+        }
+
+        @include mixins.tablet {
+            margin: 0;
+            font-size: 1rem;
+            padding: 0.5rem 1.5rem;
+        }
+
+        @include mixins.desktop {
+            font-size: 1.8rem;
+            margin-right: 1rem;
+        }
+    }
+
+    &__buttons-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        @include mixins.tablet {
+            width: 15rem;
+        }
+
+        @include mixins.desktop {
+            width: 22rem;
+        }
+    }
+
+    &__form {
+        width: 100%;
+        margin: 0.8rem;
+
+        @include mixins.tablet {
+            margin-right: 0;
+            width: 40%;
+        }
+
+        @include mixins.desktop {
+            width: 60%;
+        }
+    }
+
+    &__search-bar {
+        width: 100%;
+        padding: 0.5rem;
+        border:none;
+        border-radius: 8px;
+
+        @include mixins.tablet {
+            width: 100%;
+        }
+
+        @include mixins.desktop {
+            width: 80%;
+            font-size: 1rem;
+            padding: 0.8rem;
+        }
+
+    }
+
+    &__button {
+        width: 48%;
+        padding: 0.6rem;
+        border: 1px solid variables.$light-grey;
+        border-radius: 8px;
+        margin: 0rem 0rem 1rem 0rem;
+        background-color: transparent;
+        color: variables.$light-grey;
+        font-weight: 600;
+
+        &:hover {
+            background-color: rgba($color: variables.$accent-orange, $alpha: 0.8);
+            border-color: variables.$light-grey;
+        }
+
+        @include mixins.tablet {
+            margin: 0;
+            max-width: 8rem;
+            width: 45%;
+        }
+
+        @include mixins.desktop {
+            width: 10rem;
+            max-width: none;
+            font-size: 1.1rem;
+        }
+    }
+
+    &__logged-in {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+
+        @include mixins.tablet {
+            width: 60%;
+            inline-size: 15rem;
+        }
+
+        @include mixins.desktop {
+            width: 22rem;
+            inline-size: none;
+            justify-content: space-between;
+        }
+    }
+
+    &__username {
+        font-weight: 600;
+        color:variables.$light-orange;
+        padding-bottom: 0.3rem;
+        border-bottom: 2px solid variables.$light-orange;
+        letter-spacing: 2px;
+        margin: 0 0 1rem;
+
+        @include mixins.tablet {
+            margin: 0 1rem 0 0;
+            font-size: 0.8rem;
+        }
+
+        @include mixins.desktop {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__bottom-section {
+        display: flex;
+        flex-direction: column;
+
+        @include mixins.tablet {
+            justify-content: space-between;
+        }
+
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+
+        @include mixins.tablet {
+            flex-direction: row;
+            margin-left: 1rem;
+            width: 30rem;
+        }
+
+        @include mixins.desktop {
+            width: 31rem;
+        }
+
+    }
+}

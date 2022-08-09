@@ -1,0 +1,9 @@
+@use './styles/partials/mixins';
+@use './styles/partials/variables';
+@use './styles/partials/global';
+
+
+.app {
+    background-size: cover;
+    background-position: center;
+}
