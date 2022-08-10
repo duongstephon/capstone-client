@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SinglePost.scss';
 import Likes from '../../assets/images/icon-like.svg';
 import Delete from '../../assets/images/close-24px.svg';
