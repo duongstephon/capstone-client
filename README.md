@@ -39,6 +39,11 @@ Then run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+### Include a .env file with the following information:
+REACT_APP_API_URL=http://localhost:5050 \
+REACT_APP_UNSPLASH_API_URL=https://api.unsplash.com \
+REACT_APP_UNSPLASH_KEY=F2apOwPyPkHxeGhbI89IwQ0InaSIvLHbPLvymdLwgr4 
+
 ## Preview
 
 ![image](https://user-images.githubusercontent.com/105663385/183785780-2d17a2fc-18f5-4a11-9917-6764651f0abe.png)
