@@ -3,6 +3,9 @@
 This app was created as a full-stack application, using React (JavaScript, HTML/CSS),\
 along with Node.js and Express.js. A backend database was created using MySQL and Knex.js
 
+To view the Read.ME server API:
+https://github.com/duongstephon/capstone-server
+
 ## Tech Stack
 - React.js
 - JavaScript
@@ -14,19 +17,27 @@ along with Node.js and Express.js. A backend database was created using MySQL an
 - Knex.js
 - MySQL
 
-## Installation and Start-up
-### Installation
-- npm install
-- npm install axios
-- npm install sass
+## Running Locally
+Clone the project
 
-### `npm start`
+```bash
+  git clone https://github.com/duongstephon/capstone-client.git
+```
+
+In project directory
+
+```bash
+  cd client-side/
+```
+
+Then run:
+
+```bash
+  npm start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ## Preview
 
